@@ -37,7 +37,7 @@ python app.py --config config.yaml
 之後每次重新開啟 PowerShell，只需要：
 
 ```powershell
-cd "X:\NTUST\Code\Elderly Fall Detection System"
+cd elderly-fall-detection-system
 conda activate fall-detection
 python app.py
 ```
