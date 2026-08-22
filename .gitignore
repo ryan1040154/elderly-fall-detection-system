@@ -1,0 +1,8 @@
+.venv/
+.ultralytics/
+Ultralytics/
+__pycache__/
+*.py[cod]
+config.yaml
+events/
+*.pt

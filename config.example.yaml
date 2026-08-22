@@ -1,0 +1,40 @@
+camera:
+  source: 0                 # USB camera index, video path, or RTSP URL
+  width: 1280
+  height: 720
+  inference_fps: 10
+
+model:
+  name: yolo11n-pose.pt
+  confidence: 0.45
+  device: ""                # blank = auto; examples: cpu, 0
+  tracker: bytetrack.yaml
+
+fall_detection:
+  confirmation_seconds: 1.5
+  alert_after_seconds: 30
+  recovery_seconds: 1.5
+  missing_person_grace_seconds: 2
+  horizontal_angle_degrees: 55
+  bbox_aspect_ratio: 1.05
+  rapid_drop_per_second: 0.35
+  min_keypoint_confidence: 0.35
+
+recording:
+  enabled: true
+  output_directory: events
+  seconds_before: 10
+  seconds_after: 20
+
+notification:
+  line_enabled: false
+  line_target: single        # single = one user ID; broadcast = all account friends
+  line_channel_access_token: ""
+  line_user_id: ""
+  bark_enabled: false
+  bark_server: "https://api.day.app"
+  bark_device_keys: []       # Add one regenerated key per family iPhone
+  bark_level: critical       # Bypass silent/focus when iOS permission allows it
+  bark_volume: 10            # 0-10, used by critical alerts
+  bark_sound: electronic
+  bark_call: true            # Keep ringing for about 30 seconds
