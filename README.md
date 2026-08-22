@@ -1,6 +1,6 @@
 # Elderly Fall Detection MVP
 
-使用固定相機與 Ultralytics YOLO11-Pose，在本機追蹤人體姿態；疑似倒地經確認後開始計時，持續 30 秒便發出聲音及 LINE 警報，並保存事件前後影片。
+使用固定相機與 Ultralytics YOLO11-Pose，在本機追蹤人體姿態；疑似倒地經確認後開始計時，持續 30 秒便發出本機及手機通知，並保存事件前後影片。
 
 > 這是照護輔助原型，不是醫療器材，也不能保證偵測所有跌倒。請勿讓它成為唯一緊急求助方式，第一版也不會自動撥打 119。
 
@@ -17,20 +17,39 @@
 
 ## 安裝
 
-建議使用 Python 3.10～3.12，並建立獨立虛擬環境：
+建議安裝 Anaconda 或 Miniconda，並建立獨立的 Python 3.12 環境：
 
 ```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
+conda create --name fall-detection python=3.12 -y
+conda activate fall-detection
 python -m pip install -r requirements.txt
 Copy-Item config.example.yaml config.yaml
 ```
+
+`config.yaml` 保存相機、LINE 與 Bark 等本機設定，已被 `.gitignore` 排除。請勿將通知 Token 或裝置 Key 寫入 `config.example.yaml`。
 
 首次執行會由 Ultralytics 下載模型。啟動 USB 相機：
 
 ```powershell
 python app.py --config config.yaml
 ```
+
+之後每次重新開啟 PowerShell，只需要：
+
+```powershell
+cd "X:\NTUST\Code\Elderly Fall Detection System"
+conda activate fall-detection
+python app.py
+```
+
+確認目前使用正確的 Conda 環境：
+
+```powershell
+conda env list
+python -c "import sys; print(sys.executable)"
+```
+
+Python 路徑應包含 `envs\fall-detection\python.exe`。要離開環境時執行 `conda deactivate`。
 
 要先用錄好的影片測試，將 `config.yaml` 的 `camera.source` 改成影片路徑。RTSP 相機則填完整 RTSP URL。
 
